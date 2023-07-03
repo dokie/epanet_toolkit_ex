@@ -1,6 +1,3 @@
-#
-# Copyright © QixSoft Limited 2002-2023
-#
 defmodule EPANET.Toolkit.MixProject do
   @moduledoc """
   Mix file for the EPANET Toolkit library.
@@ -10,7 +7,7 @@ defmodule EPANET.Toolkit.MixProject do
   def project do
     [
       aliases: aliases(),
-      app: :elixir_template,
+      app: :epanet_toolkit_ex,
       deps: deps(),
       description: description(),
       dialyzer: [
@@ -71,8 +68,7 @@ defmodule EPANET.Toolkit.MixProject do
         "mix.exs",
         "README.md"
       ],
-      organization: "QixSoft",
-      maintainers: [""],
+      maintainers: ["dokie"],
       licenses: ["MIT"],
       links: %{
         "GitHub" => "https://github.com/dokie/epanet_toolkit_ex",

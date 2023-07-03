@@ -1,6 +1,4 @@
-#
-# Copyright © QixSoft Limited 2002-2023
-#
+
 name: "On Merge to master - Build, Test, Build Container and Deploy CI"
 
 on:

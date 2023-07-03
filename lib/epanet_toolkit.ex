@@ -1,8 +1,5 @@
-#
-# Copyright © QixSoft Limited 2002-2023
-#
-defmodule Congruity.ElixirTemplate do
+defmodule EPANET.Toolkit do
   @moduledoc """
-  Elixir Template functions.
+  Elixir EPANET Toolkit wrapper functions.
   """
 end

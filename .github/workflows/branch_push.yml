@@ -1,6 +1,4 @@
-#
-# Copyright © QixSoft Limited 2002-2023
-#
+
 name: "On non master branch push"
 
 on: [push]

@@ -1,7 +1,4 @@
-#
-# Copyright © QixSoft Limited 2002-2023
-#
-defmodule Congruity.ElixirTemplate.Application do
+defmodule EPANET.Toolkit.Application do
   @moduledoc """
   Main OTP Application supervisor for the Elixir EPANET toolkit wrapper.
   """
