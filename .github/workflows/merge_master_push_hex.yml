@@ -1,0 +1,60 @@
+
+name: "On Merge to master - Build, Test, Build Container and Deploy CI"
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_test:
+    uses: ./.github/workflows/build_and_test.yml
+    secrets:
+      HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    name: Publish to HEX
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        elixir: [1.12.3]
+        otp: [24.3.4]
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          token: ${{ secrets.CI_TOKEN }}
+
+      - uses: actions/checkout@v3
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ matrix.elixir }} # Define the elixir version [required]
+          otp-version: ${{ matrix.otp }} # Define the OTP version [required]
+
+      - name: Retrieve Mix Dependencies Cache
+        uses: actions/cache@v3
+        id: mix-cache #id to use in retrieve action
+        with:
+          path: deps
+          key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ secrets.CACHE_VERSION }}-${{ secrets.INVALIDATE_CACHE }}-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+
+      - name: Install Mix Dependencies
+        if: steps.mix-cache.outputs.cache-hit != 'true'
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
+
+      - name: Run Tests
+        run: mix test
+
+      - name: Authorise and publish to HEX
+        env:
+          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
+        run: |
+          mix hex.user auth --key-name HEX_API_KEY
+          mix hex.publish --yes --replace

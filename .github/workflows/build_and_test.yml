@@ -1,7 +1,4 @@
-#
-# Copyright © Inflowmatix Limited 2020-2023
-# Copyright © arboricity™ 2020-2023
-#
+
 name: Elixir Standard CI Build and Testing
 
 on:
@@ -20,8 +17,8 @@ jobs:
 
     strategy:
       matrix:
-        elixir: [1.14.4]
-        otp: [24.3.4]
+        elixir: [1.14.5]
+        otp: [25.3]
 
     steps:
       - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
@@ -46,7 +43,6 @@ jobs:
         run: |
           mix local.rebar --force
           mix local.hex --force
-          mix hex.organization auth inflowmatix --key "$HEX_API_KEY"
           mix deps.get
 
       - name: Compile
@@ -59,8 +55,6 @@ jobs:
         run: mix credo --strict
 
       - name: Run Tests
-        env:
-          CONGRUITY_API_URL: "https://localhost:8443/v1"
         run: |
           mix test
 

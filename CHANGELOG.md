@@ -1,1 +1,1 @@
-# Change Log for Elixir Template application/library
+# Change Log for Elixir EPANET Toolkit library
