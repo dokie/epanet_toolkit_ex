@@ -15,7 +15,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            @arboricity/arboricity This issue has been auto approved according to the arboricity™ standard process. 
+            This issue has been auto approved. 
             - **Make sure to reference this issue in your pull request.** 
             - Thank you for your contribution! :sparkles:
           reactions: '+1'

@@ -1,10 +1,9 @@
 #
-# Copyright © Inflowmatix Limited 2019-2023
-# Copyright © arboricity™ 2019-2023
+# Copyright © QixSoft Limited 2002-2023
 #
 defmodule Congruity.ElixirTemplate.Application do
   @moduledoc """
-  Main OTP Application supervisor for the Elixir Template service.
+  Main OTP Application supervisor for the Elixir EPANET toolkit wrapper.
   """
   use Application
 
