@@ -1,0 +1,14 @@
+#
+# Copyright © Inflowmatix Limited 2020-2023
+# Copyright © arboricity™ 2020-2023
+#
+name: "On non master branch push"
+
+on: [push]
+
+jobs:
+  build_and_test:
+    if: github.ref != 'refs/heads/master'
+    uses: ./.github/workflows/build_and_test.yml
+    secrets:
+      HEX_API_KEY: ${{ secrets.HEX_API_KEY }}

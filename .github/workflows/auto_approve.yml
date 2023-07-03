@@ -1,0 +1,21 @@
+name: Auto approve certain Issues via Comment
+on:
+  issues:
+    types:
+      - labeled
+jobs:
+  add-comment:
+    if: github.event.label.name == 'bug' || github.event.label.name == 'maintenance'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add comment
+        uses: peter-evans/create-or-update-comment@c6c9a1a66007646a28c153e2a8580a5bad27bcfa # v3.0.2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            @arboricity/arboricity This issue has been auto approved according to the arboricity™ standard process. 
+            - **Make sure to reference this issue in your pull request.** 
+            - Thank you for your contribution! :sparkles:
+          reactions: '+1'
